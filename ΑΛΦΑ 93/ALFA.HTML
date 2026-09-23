@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ΑΛΦΑ 93 – Σύλλογος Μπάσκετ</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000000;--panel:#0e0e0e;--panel2:#161616;--line:#2b2b2b;--gold:#f7c600;--gold2:#ffe066;--text:#ededed;--mut:#9c9c9c;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(80px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin: 0;
+  background: var(--bg) url('Screenshot-2026-05-31-172052.png') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}h1,h2,h3,.hd{font-family:"Roboto Condensed","Arial Narrow",Arial,sans-serif;margin:0;line-height:1.15}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+/* top bar */
+.top{background:var(--panel);border-bottom:1px solid var(--line);font-size:14px}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:42px;gap:12px;flex-wrap:wrap}
+.top span{color:var(--mut)}
+.soc{display:flex;gap:8px}
+.soc a{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);transition:.2s}
+.soc a:hover{background:var(--gold);color:#000}
+.soc svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(0,0,0,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:64px}
+.logo{font:900 30px/1 "Roboto Condensed",Arial,sans-serif;color:var(--gold);letter-spacing:1px}
+.logo small{color:#fff;font-weight:700}
+nav ul{list-style:none;display:flex;gap:4px;margin:0;padding:0}
+nav a{display:block;padding:22px 14px 18px;font:700 16px "Roboto Condensed",Arial,sans-serif;letter-spacing:.5px;border-bottom:4px solid transparent;transition:.2s}
+nav a:hover{color:var(--gold)}
+nav a[aria-current=page]{color:var(--gold);border-bottom-color:var(--gold)}
+.burger{display:none;background:none;border:1px solid var(--gold);color:var(--gold);border-radius:6px;padding:8px 12px;font-size:18px;cursor:pointer}
+/* ribbon */
+.ribbon{background:linear-gradient(90deg,#c99a00,var(--gold) 20%,var(--gold2) 50%,var(--gold) 80%,#c99a00);color:#000;text-align:center;padding:16px 20px;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);padding-bottom:30px}
+.ribbon p{margin:0;font:900 clamp(20px,4.5vw,40px)/1.1 "Roboto Condensed",Arial,sans-serif;letter-spacing:3px}
+/* slider */
+.slider{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:32px}
+.track{display:flex;transition:transform .7s cubic-bezier(.6,0,.2,1)}
+.slide{min-width:100%;position:relative;aspect-ratio:16/7;min-height:260px;background:radial-gradient(circle at 75% 30%,#3a2f00,#0a0a0a 65%);background-size:cover;background-position:center;display:flex;align-items:flex-end;overflow:hidden}
+.slide::before{content:"93";position:absolute;right:4%;top:-6%;font:900 clamp(140px,26vw,320px)/1 "Roboto Condensed",Arial,sans-serif;color:rgba(247,198,0,.09)}
+.slide.has-img::before{display:none}
+.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.88),rgba(0,0,0,.05) 65%)}
+.cap{position:relative;z-index:1;padding:24px 28px 40px;max-width:640px}
+.cap h2{font-size:clamp(24px,4vw,40px);color:var(--gold);margin-bottom:8px}
+.cap p{margin:0;color:#ddd}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);background:rgba(0,0,0,.6);color:var(--gold);font-size:20px;cursor:pointer}
+.arrow:hover{background:var(--gold);color:#000}
+.prev{left:12px}.next{right:12px}
+.dots{position:absolute;z-index:2;bottom:14px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.dots button{width:11px;height:11px;border-radius:50%;border:1px solid var(--gold);background:transparent;padding:0;cursor:pointer}
+.dots button[aria-current=true]{background:var(--gold)}
+/* layout */
+h2.title{font-size:30px;color:var(--gold);padding-bottom:10px;margin-bottom:22px;border-bottom:2px solid var(--gold)}
+.lead{color:#cfcfcf;max-width:70ch}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s}
+.card:hover{border-color:var(--gold)}
+.thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#2b2200,#0b0b0b);background-size:cover;background-position:center;display:grid;place-items:center;font:900 54px "Roboto Condensed",Arial,sans-serif;color:rgba(247,198,0,.35)}
+.thumb.has-img{color:transparent}
+.cbody{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.meta{font-size:13px;color:var(--gold)}
+.card h3{font-size:22px}
+.card p{margin:0;color:#c4c4c4;font-size:15px}
+.more{margin-top:6px}
+.full{display:none}
+.card.open .full{display:block}
+.btn{align-self:flex-start;background:var(--gold);color:#000;border:0;border-radius:6px;padding:9px 18px;font:700 15px "Roboto Condensed",Arial,sans-serif;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--gold2)}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn.ghost:hover{background:var(--gold);color:#000}
+.empty{color:var(--mut);border:1px dashed var(--line);border-radius:10px;padding:24px}
+.sec{margin-bottom:44px}
+/* sidebar */
+aside{display:flex;flex-direction:column;gap:24px}
+.w{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
+.w h3{font-size:20px;color:var(--gold);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.w ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.w li a:hover{color:var(--gold)}
+.w small{display:block;color:var(--mut)}
+.search{display:flex;gap:8px}
+.search input{flex:1;min-width:0;background:#000;border:1px solid var(--line);border-radius:6px;padding:10px 12px;color:var(--text);font:inherit}
+.search input:focus{border-color:var(--gold);outline:none}
+/* people / photos / contact */
+.person{padding:18px}
+.person b{font:700 20px "Roboto Condensed",Arial,sans-serif;display:block}
+.person span{color:var(--gold);font-size:14px}
+.num{font:900 42px/1 "Roboto Condensed",Arial,sans-serif;color:var(--gold);float:right}
+/* Φωτογραφίες */
+.photos{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.photo-card{border-radius:8px;border:1px solid var(--line);overflow:hidden;background:var(--panel);cursor:pointer;aspect-ratio:4/3;display:grid;place-items:center;transition:border-color .2s}
+.photo-card:hover{border-color:var(--gold)}
+.photo-card img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.photo-card:hover img{transform:scale(1.03)}
+.contact-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.contact-list a{color:var(--gold);border-bottom:1px solid transparent}
+.contact-list a:hover{border-color:var(--gold)}
+footer{border-top:3px solid var(--gold);background:var(--panel);text-align:center;padding:26px 20px;color:var(--mut);font-size:14px}
+@media(max-width:900px){
+ .layout{grid-template-columns:1fr}
+ .burger{display:block}
+ nav{position:absolute;left:0;right:0;top:100%;background:#000;border-bottom:1px solid var(--line);display:none}
+ nav.open{display:block}
+ nav ul{flex-direction:column;gap:0;padding:6px 20px 14px}
+ nav a{padding:14px 0;border-bottom:1px solid var(--line)}
+ nav a[aria-current=page]{border-bottom-color:var(--gold)}
+ .slide{aspect-ratio:auto;min-height:320px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(max-width: 900px) {
+  /* 1. Η πάνω μπάρα (top) */
+  .top {
+    display: none; /* Αν θέλεις να κρύβεται εντελώς στα κινητά, άφησε το display: none. Αν θες απλά να μικρύνει, σβήσ’ το. */
+  }
+
+  /* 2. Η κίτρινη κορδέλα (ribbon) "ONE FOR ALL..." */
+  .ribbon {
+    padding: 10px 10px 20px;
+  }
+  .ribbon p {
+    font-size: 16px; /* Μικραίνει τα γράμματα για να χωράνε στην οθόνη του κινητού */
+    letter-spacing: 1px;
+  }
+}@media(max-width: 900px) {
+  /* Προσαρμογή της επάνω μπάρας (top) στα κινητά */
+  .top .wrap {
+    justify-content: center;
+    padding: 6px 10px;
+  }
+  .top span {
+    display: none; /* Κρύβει το "Αθλητικός Σύλλογος Μπάσκετ" για να μην στριμώχνεται και αφήνει χώρο στα social */
+  }
+
+  /* Προσαρμογή του κεντρικού μενού (nav) για να ανοίγει όμορφα στα κινητά */
+  header.nav .wrap {
+    min-height: 52px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+}@media(max-width: 900px) {
+  /* Κάνει το banner και την κίτρινη κορδέλα να πιάνουν όλο το πλάτος της οθόνης */
+  .slider, .ribbon {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    border-radius: 0; /* Αφαιρεί τις γωνίες για να κολλάει τέλεια στις άκρες */
+  }
+}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap">
+ <span>Αθλητικός Σύλλογος Μπάσκετ</span>
+ <div class="soc" id="soc"></div>
+</div></div>
+
+<header class="nav"><div class="wrap">
+ <a href="#home" class="logo">ΑΛΦΑ <small>93</small></a>
+ <button class="burger" id="burger" aria-label="Μενού" aria-expanded="false">☰</button>
+ <nav id="menu" aria-label="Κύριο μενού"><ul>
+  <li><a href="#home" data-v="home">Η ΟΜΑΔΑ ΜΑΣ</a></li>
+  <li><a href="#news" data-v="news">ΝΕΑ</a></li>
+  <li><a href="#photos" data-v="photos">ΦΩΤΟΓΡΑΦΙΕΣ</a></li>
+  <li><a href="#contact" data-v="contact">CONTACT</a></li>
+ </ul></nav>
+</div></header>
+
+<div class="ribbon"><p>ONE FOR ALL AND ALL FOR ONE</p></div>
+
+<div class="wrap layout">
+ <main id="main">
+  <section id="v-home">
+   <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Νέα της ομάδας">
+    <div class="track" id="track"></div>
+    <button class="arrow prev" aria-label="Προηγούμενο">‹</button>
+    <button class="arrow next" aria-label="Επόμενο">›</button>
+    <div class="dots" id="dots"></div>
+   </div>
+   <div class="sec">
+    <h2 class="title">Καλώς ήρθατε στην ΑΛΦΑ 93</h2>
+    <p class="lead" id="about"></p>
+   </div>
+   <h2 class="title">Τελευταία νέα</h2>
+   <div class="grid" id="homeNews"></div>
+  </section>
+
+<section id="v-team" hidden>
+   <h2 class="title">Η ομάδα μας</h2>
+   <div class="sec" style="background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:24px; margin-bottom:24px;">
+     <p class="lead" id="about" style="max-width:100%;"></p>
+   </div>
+   <h3 class="hd" style="margin-bottom:14px">Προπονητές</h3>
+   <div class="grid sec" id="coachGrid"></div>
+  </section>
+
+  <section id="v-news" hidden>
+   <h2 class="title" id="newsTitle">Νέα</h2>
+   <div class="grid" id="newsGrid"></div>
+  </section>
+
+  <section id="v-photos" hidden>
+   <h2 class="title">Φωτογραφίες</h2>
+   <div class="photos" id="photoGrid"></div>
+  </section>
+
+  <section id="v-contact" hidden>
+   <h2 class="title">Επικοινωνία</h2>
+   <div class="grid">
+    <div class="card"><div class="cbody"><h3>Email συλλόγου</h3><ul class="contact-list" id="emails"></ul></div></div>
+    <div class="card"><div class="cbody"><h3>Προπονητές</h3><ul class="contact-list" id="coachList"></ul></div></div>
+   </div>
+  </section>
+ </main>
+
+</div>
+
+<footer>© <span id="yr"></span> ΑΛΦΑ 93 – Σύλλογος Μπάσκετ</footer>
+
+<script>
+/* ============ ΡΥΘΜΙΣΕΙΣ – ΑΛΛΑΞΤΕ ΕΔΩ ΤΑ ΠΕΡΙΕΧΟΜΕΝΑ ΣΑΣ ============ */
+const CONFIG = {
+about: "Καλώς ορίσατε στην οικογένεια της Α.Λ.Φ.Α. 93!<br><br>Από το 1993 που ιδρύθηκε ο σύλλογός μας (ΑΛΦΑ 93) στο Παναιτώλιο Αγρινίου, το μπάσκετ για εμάς δεν είναι απλώς ένα παιχνίδι, αλλά ένας τρόπος να φέρουμε τα παιδιά της ευρύτερης περιοχής του Αγρινίου κοντά στον αθλητισμό, κοντά στο μπάσκετ. Με βαθιά αγάπη για την καλαθοσφαίριση, χτίζουμε καθημερινά μια ζωντανή αθλητική κοινότητα.<br><br><strong style='color:var(--gold);'>Η Φιλοσοφία Μας</strong><br>Η καρδιά της Α.Λ.Φ.Α. 93 χτυπά στις Ακαδημίες της. Πιστεύουμε ακράδαντα ότι οι γερές βάσεις μπαίνουν από νωρίς, γι’ αυτό επενδύουμε στα νέα παιδιά της περιοχής μας. Στόχος μας δεν είναι μόνο η σωστή εκμάθηση των μυστικών του μπάσκετ, αλλά η καλλιέργεια του «ευ αγωνίζεσθαι»,του αμοιβαίου σεβασμού, της πειθαρχίας και η διαμόρφωση σωστών χαρακτήρων. Όλα αυτά μέσα από την ομαδικότητα και την αγάπη για τον συναθλητή και για την ομάδα.",  autoSlideMs: 5000,
+  /* Slider: βάλτε στο "img" τη διαδρομή/URL της φωτογραφίας σας (π.χ. "images/slide1.jpg"). */
+  slides: [
+    { img: "spo-alfa-lixi-akadimion10 (1).jpg", title: "ALL FOR ONE AND ONE FOR ALL", text: "Για εμάς στην ΑΛΦΑ 93 Αγρινίου, το μπάσκετ είναι απλώς η αφορμή. Ο στόχος μας είναι η δημιουργία σωστών αθλητών-ανθρώπων.Αθλητές – Προπονητές – Γονείς – Προπονητές – Δοιήκηση. Μία οικογένεια!Στην ΑΛΦΑ 93 δεν παίζουμε μόνο για τη νίκη, παίζουμε ο ένας για τον άλλον.Μας ενώνει η αγάπη για το μπάσκετ και ο αμοιβαίος σεβασμός. Είμαστε μια μεγάλη αγκαλιά στο Αγρίνιο, μια ομάδα που πάνω από όλα είναι το δεύτερο σπίτι μας." },
+    { img: "alfa93-800x445-1.jpg", title: "IT ALL STARTS FROM FAMILY", text: "‘Ολα αυτά τα χρόνια από την ίδρυση του Συλλόγου μας το 1993, έως και σήμερα, αυτό που μας χαρακτηρίζει σαν ομάδα είναι το δέσιμο μεταξύ όλων των ανθρώπων που έχουν ρόλο σε αυτή. Είμαστε όλοι μία μεγάλη οικογένεια. Για να καταφέρεις κάτι, είτε στο μπάσκετ, είτε στην ζωή γενικότερα, πιστεύουμε ότι το βασικότερο θεμέλιο είναι η οικογένεια." },
+    { img: "roz (1).jpg", title: "RESPECT IS EARNED NOT GIVEN", text: "Πρέπει να προσπαθήσεις για να πετύχεις.Η επιτυχία χωρίς προσπάθεια όταν και αν έρθει θα είναι μία επιτυχία χωρίς αξία που δεν θα σε γεμίζει ούτε σαν αθλητή αλλά ούτε και σαν άνθρωπο.Πρέπει λοιπόν τον σεβασμό να τον κερδίσεις…" },
+    { img: "Gemini_Generated_Image_nk4v7rnk4v7rnk4v-scaled.png", title: "UNTIL I GROW WINGS", text: "Γνωρίζουμε, και άλλωστε αυτός είναι και ο στόχος μας, ότι ο σύλλογος μας θα πρέπει να είναι η βάση για να μπορέσει στην συνέχεια κάθε αθλητής να ανοίξει να φτερά του και να πετάξει."},
+ ],
+  /* Νέα: προσθέστε ή αφαιρέστε αντικείμενα. Το πιο πρόσφατο πάνω-πάνω. */
+  posts: [   
+    { id: 5, date: "05/09/2026", title: "Αρχίζουν οι προπονήσεις!", img: "propo.jpg", excerpt: "", text: "Από την Δευτέρα 7 Σεπτεμβρίου ξανά μαζί στο υπέροχο ταξίδι της γνώσης, της αλληλεγγύης, της προσπάθειας, της χαράς,της άθλησης, της συνεργασίας. Με αγάπη για το μπάσκετ και τα παιδιά. Οι προπονητές της ΑΛΦΑ 93  Ντίνος και  Απόστολος σας περιμένουμε!!!" },
+    { id: 1, title: "Οι διακρίσεις των αθλητών μας: Η μεγαλύτερη δικαίωση", img: "mpampas-kout.jpg", excerpt: "", text: "Ένα ακόμα σπουδαίο επίτευγμα που μας γεμίζει περηφάνια και επιβεβαιώνει την εξαιρετική δουλειά που γίνεται στα τμήματα υποδομής της ΑΛΦΑ 93, είναι οι ατομικές διακρίσεις των παιδιών μας. Η πίστη μας στο ταλέντο και την εξέλιξη των αθλητών μας αποδίδει καρπούς, καθώς τρια δικά μας παιδιά έχουν πάρει τη μεγάλη μεταγραφή για τις ακαδημίες του Παναθηναϊκού!<br><br><iframe src='https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fkonstantinos.karapiperis.3%2Fposts%2Fpfbid0AA4Ffw3LSbVqhQg1vRBZpT4VKo6gbGd6bKm3faVmd6QN3mAA1ptPaTpi21Ra46RMl&show_text=true&width=500' width='100%' height='607' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowfullscreen='true' allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'></iframe><br><br><iframe src='https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fkonstantinos.karapiperis.3%2Fposts%2Fpfbid0uXVZoyrKaZbXUh2osX6iy5AcGTzhKujQLM4ygqAhH2fEFM4vmmVT3QZSYjWjecBwl&show_text=true&width=500' width='100%' height='706' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowfullscreen='true' allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'></iframe><br><br>Παράλληλα, πάρα πολλοί αθλητές μας, βλέπουν τις προσπάθειές τους να αναγνωρίζονται, έχοντας κληθεί επανειλημμένα στα κλιμάκια της ΕΣΚΑΒΔΕ και στις προεθνικές ομάδες. Όλα αυτά αποτελούν την καλύτερη απάντηση στις καθημερινές δυσκολίες που αντιμετωπίζουμε και μας δίνουν τη δύναμη να συνεχίσουμε να δουλεύουμε με το ίδιο μεράκι, προσφέροντας στα παιδιά του Αγρινίου τα κατάλληλα εφόδια για να φτάσουν όσο ψηλά ονειρεύονται!<br><br>"},
+    { id: 2, date: "11/04/2022", title: "Πρωταθλήτρια παίδων η ΑΛΦΑ 93", img: "alfa93 (1).jpg", excerpt: "Με σκορ 51-47!", text: "Η ομάδα μας αναδείχθηκε πρωταθλήτρια παίδων της ΕΣΚΑΒΔΕ! Στο Final Four που έλαβε μέρος στον Αστακό, πήραμε τη νίκη στον ημιτελικό κόντρα στον γηπεδούχο Αίολο Αστακό (49-57) και κατακτήσαμε την κούπα στον τελικό απέναντι στο Ναυσίθοο Κέρκυρας με σκορ <b> 51-47 </b>. <br> Προκριθήκαμε έτσι για <b> δεύτερη φορά μέσα σε 4 χρόνια</b> (και μάλιστα με ίδιο σκορ) στην Β΄ Φάση του Πανελλήνιου Πρωταθλήματος" },
+    { id: 3, date: "0/09/2020", title: "Πρωταθλήτρια Μίνι 2019-2020", img: "telikoskypelo.jpg", excerpt: "", text: "Πρωταθλήτρια αναδείχθηκε η ομάδα μας στην κατηγορία Μίνι της ΕΣΚΑΒΔΕ για την μπασκετική χρονιά 2019-2020. Μετά απο έναν συναρπαστικό αγωνα έναντι του ΑΓΣΙ-Ιωαννίνων καταφέραμε και προηγηθήκαμε κατακτώντας έτσι το δεύτερο κύπελλο μας. Συγχαρητήρια σε όλους τους αθλητές!!" },
+    { id: 4, date: "01/04/2018", title: "Πρωταθλητές Δυτικής Ελλάδας οι παίδες της ΑΛΦΑ 93!", img: "alfa93-800x445-1.jpg", excerpt: "Με σκορ 51-47!", text: " Στον τελικό που πραγματοποιήθηκε στη Λευκάδα, τα παιδιά μας νίκησαν τον Πρωτέα Ηγουμενίτσας με <b>51-47</b>, έχοντας τον έλεγχο σε όλη τη διάρκεια του αγώνα. Με ψυχραιμία και σωστή ομαδική δουλειά πήραμε το τρόπαιο και εξασφαλίσαμε την πρόκριση στη Β΄ Φάση του Πανελληνίου Πρωταθλήματος ανάμεσα στις καλύτερες ομάδες της Ελλάδας. Με αυτή την νίκη κλείσαμε αήττητοι το πρωτάθλημα της ΕΣΚΑΒΔΕ!<br><br><img src='1η.jpg' style='width:100%; border-radius:8px;'><br><br>Δεκάλεπτα: 11-10, 25-22, 37-33, 51-47.<br><br>Coaches: Καραπιπέρης-Καρατσώρης: Τσιλιμπώκος, Χρήστου 2, Ρήγας 9, Παπαχρήστος 9, Καλαμπόκας, Σαράντης, Λυμπέρης 8, Παπαχρήστος Δ., Καρκαμπούνας 18, Τασολάμπρος, Λάμπρης 2, Βαζούκης 3." }
+  ],
+    photos: [ 
+            { img: "alfa93 (1).jpg", alt: "Φωτογραφία 1" },
+            {img: "alfa93-800x445-1.jpg", alt: "Φωτογραφία 2"},
+            {img: "telikoskypelo.jpg", alt: "Φωτογραφία 3"}, 
+            { img: "482986521_3023178431180727_2295801036731221255_n (1).jpg", alt: "Φωτογραφία 4" }, 
+            { img: "482077351_3023178604514043_4552840493748130342_n (1).jpg", alt: "Φωτογραφία 5" },
+            { img: "481983911_3023178384514065_6686733247333928402_n (1).jpg", alt: "Φωτογραφία 6" }, 
+            { img: "κυπελλα (1).jpg", alt: "Φωτογραφία 7" },
+            { img: "ακαδδδ (1).jpg", alt: "Φωτογραφία 8" },
+            {img: "481984993_3023178774514026_3527761883083292505_n (1).jpg", alt: "Φωτογραφία 9"},
+            {img: "μπαμπασ-σκγ-1.jpg", alt: "Φωτογραφία 10"},
+            {img: "spo-alfa-lixi-akadimion10 (1).jpg", alt: "Φωτογραφία 11"},
+            {img: "roz (1).jpg", alt: "Φωτογραφία 12"},
+            {img: "παιδικο.jpg", alt: "Φωτογραφία 13"},
+            {img: "1η.jpg", alt: "Φωτογραφία 14"},
+            {img: "alfa-aka.jpg", alt: "Φωτογραφία 15"},
+            {img: "palio.jpg",  alt: "Φωτογραφία 16"},
+            {img: "sir.jpg", alt: "Φωτογραφία 17"},
+            {img: "aitwliko.jpg", alt: "Φωτογραφία 18"},
+            {img: "oloimazi.jpg", alt: "Φωτογραφία 19"},
+            {img: "omadikhh2.jpg", alt: "Φωτογραφία 20"},
+            {img: "mini2005.jpg", alt: "Φωτογραφία 21"},
+            {img: "mikroulia.jpg", alt: "Φωτογραφία 22"},
+            {img: "nampei.jpg", alt: "Φωτογραφία 24"}, 
+            {img: "xaxa.jpg", alt: "Φωτογραφία 25"},
+            {img: "Screenshot 2026-09-23 230427.png", alt: "Φωτογραφία 26"},
+            { img: "telikos.jpg", alt: "Φωτογραφία 27" },
+            {img: "Screenshot-2026-07-21-222232.png", alt: "Φωτογραφία 28"}, 
+            {img: "lala.jpg", alt: "Φωτογραφία 29"},
+            {img: "lili.jpg", alt: "Φωτογραφία 30"},
+  ],
+
+  coaches: [
+    { name: "Kωνσταντίνος Καραπιπέρης", role: "Head coach", phone: "+30 6974901510" },
+    { name: "Απόστολος Καραπιπέρης", role: "Προπονητής ", phone: "+30 6942549860" },
+  ],
+  emails: ["info@alfa93.gr", "dinoscoach@gmail.com"],
+  social: [
+    { name: "Facebook", url: "https://www.facebook.com/alfa93bc/?locale=el_GR", svg: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/>' },
+    { name: "Instagram", url: "https://www.instagram.com/alfa93academy/", svg: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/>' },
+   
+  ]
+};
+/* ================================================================ */
+const $ = s => document.querySelector(s);
+const bg = i => i ? ` style="background-image:url('${i}')"` : "";
+const cls = i => i ? " has-img" : "";
+
+$("#yr").textContent = new Date().getFullYear();
+$("#about").innerHTML = CONFIG.about;
+$("#soc").innerHTML = CONFIG.social.map(s => `<a href="${s.url}" aria-label="${s.name}" title="${s.name}"><svg viewBox="0 0 24 24">${s.svg}</svg></a>`).join("");
+
+/* Slider */
+(function(){
+  const S = CONFIG.slides, track = $("#track"), dots = $("#dots"); let i = 0, timer;
+  track.innerHTML = S.map(s => `<div class="slide${cls(s.img)}"${bg(s.img)}><div class="cap"><h2>${s.title}</h2><p>${s.text}</p></div></div>`).join("");
+  dots.innerHTML = S.map((_, k) => `<button aria-label="Slide ${k+1}"></button>`).join("");
+  const show = n => { i = (n + S.length) % S.length; track.style.transform = `translateX(-${i*100}%)`;
+    [...dots.children].forEach((d, k) => d.setAttribute("aria-current", k === i)); };
+  const play = () => { clearInterval(timer); timer = setInterval(() => show(i+1), CONFIG.autoSlideMs); };
+  $(".prev").onclick = () => { show(i-1); play(); };
+  $(".next").onclick = () => { show(i+1); play(); };
+  [...dots.children].forEach((d, k) => d.onclick = () => { show(k); play(); });
+  const sl = $("#slider"); sl.onmouseenter = () => clearInterval(timer); sl.onmouseleave = play;
+  show(0); play();
+})();
+
+/* Κάρτες *//* Κάρτες */
+/* Κάρτες */
+const card = p => `<article class="card" id="p-${p.id}"><div class="thumb${cls(p.img)}"${bg(p.img)}>93</div><div class="cbody"><span class="meta">${p.date}</span><h3>${p.title}</h3><p>${p.excerpt}</p><div class="full">${p.text}</div><button class="btn ghost more" onclick="this.closest('.card').classList.toggle('open');this.textContent=this.closest('.card').classList.contains('open')?'Λιγότερα':'Διαβάστε περισσότερα'">Διαβάστε περισσότερα</button></div></article>`;
+
+function renderNews(){
+  $("#newsGrid").innerHTML = CONFIG.posts.map(card).join("");
+}
+
+$("#homeNews").innerHTML = CONFIG.posts.map(card).join("");
+
+/* Ομάδα, φωτογραφίες, επικοινωνία */
+$("#coachGrid").innerHTML = CONFIG.coaches.map(c => `<div class="card person"><b>${c.name}</b><span>${c.role}</span><p><a href="tel:${c.phone.replace(/\s/g,'')}">${c.phone}</a></p></div>`).join("");
+/* Φωτογραφίες */
+$("#photoGrid").innerHTML = CONFIG.photos.map(p => p.img ? 
+  `<div class="photo-card" onclick="openLightbox('${p.img}')"><img src="${p.img}" alt="${p.alt}"></div>` : 
+  `<div class="photo-card" style="color:var(--mut); font-size:14px; text-align:center; padding:10px;">${p.alt}<br><small>(Προσθέστε αρχείο)</small></div>`
+).join("");
+
+window.openLightbox = src => {
+  $("#lightboxImg").src = src;
+  $("#lightbox").style.display = "flex";
+};$("#emails").innerHTML = CONFIG.emails.map(e => `<li><a href="mailto:${e}">${e}</a></li>`).join("");
+$("#coachList").innerHTML = CONFIG.coaches.map(c => `<li><b>${c.name}</b> (${c.role})<br><a href="tel:${c.phone.replace(/\s/g,'')}">${c.phone}</a></li>`).join("");
+
+/* Πλοήγηση */
+const views = ["home","team","news","photos","contact"];
+function go(){
+  let h = location.hash.slice(1) || "home"; if (!views.includes(h)) h = "home";
+  views.forEach(v => $("#v-" + v).hidden = v !== h);
+  document.querySelectorAll("nav a").forEach(a => { if (a.dataset.v === h) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  if (h === "news" && !query) renderNews();
+  $("#menu").classList.remove("open"); $("#burger").setAttribute("aria-expanded", "false");
+  window.scrollTo(0, 0);
+}
+$("#burger").onclick = () => { const o = $("#menu").classList.toggle("open"); $("#burger").setAttribute("aria-expanded", o); };
+addEventListener("hashchange", go);
+renderNews(); go();
+</script>
+<!-- Παράθυρο προβολής φωτογραφίας (Lightbox) -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:1000; justify-content:center; align-items:center; cursor:pointer;" onclick="this.style.display='none'">
+  <img id="lightboxImg" src="" style="max-width:92%; max-height:92%; border-radius:8px; object-fit:contain;">
+</div>
+</body>
+</html>
